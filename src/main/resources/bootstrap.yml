@@ -1,9 +1,23 @@
-server:
-  port: 8888
 spring:
+  application:
+    name: ms-config
   cloud:
     config:
       server:
         git:
           uri: https://github.com/ilopeza/config.git
-        clone-on-start: true
+          clone-on-start: true
+          failFast: true
+          refresh-rate: 300
+          searchPaths: '{application}/{profile}'
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+health:
+    config:
+        enabled: true
+server:
+    port: 8888
